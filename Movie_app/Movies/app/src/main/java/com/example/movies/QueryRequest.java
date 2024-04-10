@@ -27,6 +27,18 @@ public class QueryRequest extends StringRequest {
         args.put("password", password.trim());
     }
 
+    public QueryRequest(String newEmail, String newPassword, String name, String studentId, String type, String url, Response.Listener<String> listener){
+        super(Method.POST, url, listener, err);
+        Log.d("Post request sent"," : ");
+        args = new HashMap<String, String>();
+        args.put("email", newEmail.trim());
+        args.put("password", newPassword.trim());
+        args.put("cpassword", newPassword.trim());
+        args.put("name", name.trim());
+        args.put("id", studentId.trim());
+        args.put("type", type.trim());
+    }
+
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {
         return args;
