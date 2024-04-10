@@ -19,10 +19,12 @@ public class QueryRequest extends StringRequest {
         }
     };
 
-    public QueryRequest(String year, String url, Response.Listener<String> listener){
+    public QueryRequest(String email, String password, String url, Response.Listener<String> listener){
         super(Method.POST, url, listener, err);
+        Log.d("Post request sent"," : ");
         args = new HashMap<String, String>();
-        args.put("year", year);
+        args.put("email", email.trim());
+        args.put("password", password.trim());
     }
 
     @Override

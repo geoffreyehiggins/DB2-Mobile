@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Movies"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PageMovie"/>
-            <activity android:name=".MovieQuery"
+        <activity android:name=".AccountPage"/>
+            <activity android:name=".LoginQuery"
                         android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
