@@ -6,19 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".AccountPage">
 
-    <TextView
-        android:id="@+id/textViewStudentCourses"
-        android:layout_width="307dp"
-        android:layout_height="399dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="143dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginBottom="189dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <WebView
+        android:id="@+id/webViewStudentDashboard"
+        android:layout_width="379dp"
+        android:layout_height="510dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonNavToCourseReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="65dp"
+        android:text="Go to course registration"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/webViewStudentDashboard" />
 </androidx.constraintlayout.widget.ConstraintLayout>
