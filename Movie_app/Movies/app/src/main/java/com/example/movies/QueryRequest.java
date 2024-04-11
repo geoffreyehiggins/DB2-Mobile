@@ -29,7 +29,7 @@ public class QueryRequest extends StringRequest {
     }
 
     public QueryRequest(String newEmail, String newPassword, String name, String studentId, String type, String url, Response.Listener<String> listener){
-        // post req for the account registration
+        // post req for the new account registration
         super(Method.POST, url, listener, err);
         Log.d("Post request sent"," : ");
         args = new HashMap<String, String>();
@@ -42,11 +42,18 @@ public class QueryRequest extends StringRequest {
     }
 
     public QueryRequest(String email, String url, Response.Listener<String> listener){
-        // post req for the student course history fetch (dashbboard.php)
+        // post req for the student course history fetch (dashboard.php)
         super(Method.POST, url, listener, err);
         Log.d("Post request sent"," : ");
         args = new HashMap<String, String>();
         args.put("email", email.trim());
+    }
+
+    public QueryRequest(String url, Response.Listener<String> listener){
+        // post req for the student course history fetch (dashboard.php)
+        super(Method.GET, url, listener, err);
+        Log.d("Get request sent"," : ");
+        // args = new HashMap<String, String>();
     }
 
     @Override
