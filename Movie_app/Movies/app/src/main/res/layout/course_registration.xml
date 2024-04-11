@@ -7,14 +7,68 @@
     tools:context=".AccountPage">
 
     <EditText
-        android:id="@+id/editTextTEST"
-        android:layout_width="256dp"
-        android:layout_height="131dp"
-        android:layout_marginStart="61dp"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="210dp"
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="369dp"
+        android:layout_height="480dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="42dp"
         android:ems="10"
-        android:inputType="text"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="131dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="16dp"
+        android:text="Register Form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+
+    <EditText
+        android:id="@+id/editTextSectionId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:ems="10"
+        android:hint="SectionId"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/editTextCourseId"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCourseId" />
+
+    <EditText
+        android:id="@+id/editTextCourseId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="1dp"
+        android:ems="10"
+        android:hint="CourseId"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/editTextSectionId"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+
+    <Button
+        android:id="@+id/buttonRegisterReq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="94dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginBottom="76dp"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextSectionId"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

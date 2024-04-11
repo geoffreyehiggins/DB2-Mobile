@@ -8,6 +8,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,10 +22,12 @@ import org.json.JSONObject;
 
 public class CourseRegistrationPage extends AppCompatActivity {
 
-    TextView textBox;
+    EditText multiLineText;
 
     JSONArray jsonCourseList;
-    String formattedCourseList;
+    EditText textBoxSectionId;
+    EditText textBoxCourseId;
+    Button buttonRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,44 @@ public class CourseRegistrationPage extends AppCompatActivity {
 
         fetchAvailableCourses();
 
-        textBox = (TextView) findViewById(R.id.editTextTEST);
-        textBox.setText(formattedCourseList);
+        buttonRegister = (Button) findViewById(R.id.buttonRegisterReq);
+        textBoxCourseId = (EditText) findViewById(R.id.editTextCourseId);
+        textBoxSectionId = (EditText) findViewById(R.id.editTextSectionId);
 
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("button clicked: ", "button clicked");
+                String courseIdStr = textBoxCourseId.getText().toString();
+                String sectionIdStr = textBoxSectionId.getText().toString();
+                Log.d("course typed: ", courseIdStr);
+                Log.d("section typed: ", sectionIdStr);
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Log.d("regReqResponse: ", "response recieved");
+                            Log.d("regReqResponse: ", response);
+                            /*if(response.equals("student")) {
+
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginQuery.this);
+                                builder.setMessage("Sign In Failed").setNegativeButton("Retry", null).create().show();
+                            }*/
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                };
+                // email, courseid, sectionid in the post req
+                String emailStr = SessionManager.getInstance().getEmail();
+                QueryRequest queryRequest = new QueryRequest(emailStr, courseIdStr, sectionIdStr,  getString(R.string.url) + "mobile_class_registration.php", responseListener);
+                RequestQueue queue = Volley.newRequestQueue(CourseRegistrationPage.this);
+                queue.add(queryRequest);
+            }
+
+        });
     }
 
     private void fetchAvailableCourses() {
@@ -49,17 +87,10 @@ public class CourseRegistrationPage extends AppCompatActivity {
                     Log.d("getReqResponse", response);
                     // Handle JSON response
                     jsonCourseList = new JSONArray(response);
-                    for (int i = 0; i < jsonCourseList.length(); i++) {
-                        JSONObject jsonObject = jsonCourseList.getJSONObject(i);
-                        String courseId = jsonObject.optString("course_id", "");
-                        String sectionId = jsonObject.optString("section_id", "");
-                        String semester = jsonObject.optString("semester", "");
-                        String year = jsonObject.optString("year", "");
-                        String instructorId = jsonObject.optString("instructor_id", "");
-                        String classroomId = jsonObject.optString("classroom_id", "");
-                        String timeSlotId = jsonObject.optString("time_slot_id", "");
-                    }
-                    formattedCourseList = jsonCourseList.toString();
+
+                    multiLineText = (EditText) findViewById(R.id.editTextTextMultiLine);
+
+                    displayCourseContent(jsonCourseList);
 
                 } catch(Exception e){
                     e.printStackTrace();
@@ -68,10 +99,30 @@ public class CourseRegistrationPage extends AppCompatActivity {
 
         };
 
-        QueryRequest queryRequest = new QueryRequest(getString(R.string.url) + "mobile_class_registration.php", responseListener);
+        QueryRequest queryRequest = new QueryRequest(getString(R.string.url) + "mobile_class_view.php", responseListener);
         RequestQueue queue = Volley.newRequestQueue(CourseRegistrationPage.this);
         queue.add(queryRequest);
     }
 
+
+    void displayCourseContent(JSONArray courseListings) {
+        // take the json and display it
+        // Parse the JSON array with string builder
+        try {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < courseListings.length(); i++) {
+                JSONObject jsonObject = courseListings.getJSONObject(i);
+                String entryString = "Course ID: " + jsonObject.getString("course_id") +
+                        "Section ID: " + jsonObject.getString("section_id") + '\n';
+
+                stringBuilder.append(entryString);
+            }
+
+            multiLineText.setText(stringBuilder.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -56,6 +56,16 @@ public class QueryRequest extends StringRequest {
         // args = new HashMap<String, String>();
     }
 
+    public QueryRequest(String email, String courseId, String sectionId, String url, Response.Listener<String> listener){
+        // post req for the student course history fetch (dashboard.php)
+        super(Method.POST, url, listener, err);
+        Log.d("CourseReg request sent"," : ");
+        args = new HashMap<String, String>();
+        args.put("email", email);
+        args.put("course_id", courseId.trim());
+        args.put("section_id", sectionId.trim());
+    }
+
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {
         return args;
