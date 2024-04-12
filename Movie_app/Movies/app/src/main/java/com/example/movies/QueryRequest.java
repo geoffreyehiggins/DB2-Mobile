@@ -42,7 +42,7 @@ public class QueryRequest extends StringRequest {
     }
 
     public QueryRequest(String email, String url, Response.Listener<String> listener){
-        // post req for the student course history fetch (dashboard.php)
+        // post req for the student course history fetch (view_courses.php)
         super(Method.POST, url, listener, err);
         Log.d("Post request sent"," : ");
         args = new HashMap<String, String>();
@@ -64,6 +64,25 @@ public class QueryRequest extends StringRequest {
         args.put("email", email);
         args.put("course_id", courseId.trim());
         args.put("section_id", sectionId.trim());
+    }
+
+    public QueryRequest(int padding, String email, String url, Response.Listener<String> listener) {
+        // post req for the instructors classes history fetch (instructor_history.php)
+        super(Method.GET, url, listener, err);
+        Log.d("InstHistory request"," : ");
+        args = new HashMap<String, String>();
+        args.put("email", email);
+    }
+
+    public QueryRequest(String courseId, String sectionId, String semester, String year, String url, Response.Listener<String> listener) {
+        // post req for the student course history fetch (student_list.php)
+        super(Method.POST, url, listener, err);
+        Log.d("viewStudentListReq"," : ");
+        args = new HashMap<String, String>();
+        args.put("course_id", courseId.trim());
+        args.put("section_id", sectionId.trim());
+        args.put("semester", semester.trim());
+        args.put("year", year.trim());
     }
 
     @Override

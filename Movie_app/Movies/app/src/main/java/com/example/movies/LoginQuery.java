@@ -64,9 +64,13 @@ public class LoginQuery extends AppCompatActivity {
                                 LoginQuery.this.startActivity(intent);
                             } else if(response.equals("instructor")) {
                                 Log.d("InstructorLoggingIn: ", " ");
-                                // FUTURE POINT HERE
-                                // ROUTE TO THE instructor page here
-                                // FUTURE POINT HERE
+                                // Save user email to "global" state management class object called SessionManager
+                                SessionManager sessionManager = SessionManager.getInstance();
+                                sessionManager.setEmail(emailStr);
+
+                                // these 2 lines change the "page"
+                                Intent intent = new Intent(LoginQuery.this, InstructorPage.class);
+                                LoginQuery.this.startActivity(intent);
                             } else {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginQuery.this);
                                     builder.setMessage("Sign In Failed").setNegativeButton("Retry", null).create().show();
