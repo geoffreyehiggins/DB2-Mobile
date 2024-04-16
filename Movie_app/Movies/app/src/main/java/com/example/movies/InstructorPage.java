@@ -143,7 +143,9 @@ public class InstructorPage extends AppCompatActivity {
             for (int i = 0; i < jsonStudentList.length(); i++) {
                 JSONObject jsonObject = jsonStudentList.getJSONObject(i);
                 String entryString = jsonObject.getString("name") + ", " +
-                        jsonObject.getString("grade") + '\n';
+                        jsonObject.getString("grade") + ", " +
+                        jsonObject.getString("credits") + ", " +
+                        jsonObject.getString("gpa") + '\n';
 
                 stringBuilder.append(entryString);
             }
