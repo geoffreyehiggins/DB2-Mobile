@@ -53,14 +53,11 @@ public class CourseRegistrationPage extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Log.d("regReqResponse: ", "response recieved");
+                            Log.d("regReqResponse: ", "response received");
                             Log.d("regReqResponse: ", response);
-                            /*if(response.equals("student")) {
-
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginQuery.this);
-                                builder.setMessage("Sign In Failed").setNegativeButton("Retry", null).create().show();
-                            }*/
+                            
+                            AlertDialog.Builder builder = new AlertDialog.Builder(CourseRegistrationPage.this);
+                            builder.setMessage(response).setPositiveButton("OK", null).create().show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
